@@ -1,0 +1,603 @@
+/* =========================================
+   1. VARIÁVEIS DE CORES E RESETS GERAIS
+   ========================================= */
+:root {
+    --bg-fundo: #242424;         /* Fundo principal mais escuro */
+    --bg-painel: #363636;        /* Fundo dos painéis e navbar */
+    --bg-input: #2a2a2a;         /* Fundo dos campos de texto */
+    --cor-texto: #ffffff;
+    --cor-texto-sec: #a0a0a0;    /* Textos secundários (subtítulos) */
+    --cor-verde: #3b8536;        /* Verde base */
+    --cor-verde-hover: #489743;  /* Verde claro ao passar o mouse */
+    --cor-verde-brilho: #4ba842; /* Verde brilhante para bordas e destaques */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+body {
+    background-color: var(--bg-fundo);
+    color: var(--cor-texto);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. NAVBAR (Global para todo o sistema)
+   ========================================= */
+.navbar {
+    background-color: var(--bg-painel);
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-bottom: 3px solid var(--cor-verde);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logo-text { font-size: 24px; font-weight: bold; }
+.logo-highlight { color: var(--cor-verde-brilho); }
+.nav-user { display: flex; align-items: center; gap: 20px; font-size: 15px; }
+
+.btn-sair {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.btn-sair:hover { color: #ff4c4c; }
+
+/* =========================================
+   3. CONTAINERS DE LAYOUT PRINCIPAL
+   ========================================= */
+/* Usado na tela de criação de loja (Alinha ao centro exato) */
+.container-central {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Usado na tela de seleção de lojas (Ocupa o topo com limite de largura) */
+.container-selecao {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.header-selecao h2, .setup-box h2 { font-size: 28px; margin-bottom: 10px; }
+.header-selecao p, .subtitle { color: var(--cor-texto-sec); }
+
+/* =========================================
+   4. FORMULÁRIOS E BOTÕES GERAIS
+   ========================================= */
+.setup-box {
+    background: var(--bg-painel);
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.setup-box .subtitle { margin-bottom: 30px; }
+
+.input-group { text-align: left; margin-bottom: 20px; }
+.input-group label { display: block; font-size: 14px; color: #b3b3b3; margin-bottom: 8px; }
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-input);
+    border: 2px solid #4f4f4f;
+    border-radius: 6px;
+    color: var(--cor-texto);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.input-group input:focus { border-color: var(--cor-verde-brilho); background: #333; }
+
+.btn-verde {
+    width: 100%;
+    background: var(--cor-verde);
+    color: var(--cor-texto);
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-verde:hover {
+    background: var(--cor-verde-hover);
+    box-shadow: 0 0 15px rgba(75, 168, 66, 0.4);
+}
+
+/* =========================================
+   5. GRID DE RESTAURANTES (Caixas)
+   ========================================= */
+.header-selecao { margin-bottom: 30px; }
+
+.grid-restaurantes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* Propriedades compartilhadas pelas duas caixas (Normal e Adição) */
+.restaurante-box, .add-box {
+    border-radius: 12px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    min-height: 240px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.restaurante-box:hover, .add-box:hover { transform: translateY(-5px); }
+
+/* Exclusivo da Caixa de Restaurante (Existente) */
+.restaurante-box {
+    background-color: var(--bg-painel);
+    overflow: hidden;
+}
+
+.restaurante-box:hover { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); }
+
+.restaurante-img {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 3px solid var(--cor-verde);
+}
+
+.restaurante-info { padding: 20px; text-align: center; }
+.restaurante-info h3 { color: var(--cor-texto); font-size: 20px; }
+
+/* Exclusivo da Caixa de Adição (+) */
+.add-box {
+    background-color: transparent;
+    border: 3px dashed var(--cor-verde-brilho);
+    justify-content: center;
+    align-items: center;
+}
+
+.add-box:hover {
+    background-color: rgba(75, 168, 66, 0.1);
+    box-shadow: 0 10px 20px rgba(75, 168, 66, 0.15);
+}
+
+.plus-icon { font-size: 50px; font-weight: bold; color: var(--cor-verde-brilho); margin-bottom: 10px; line-height: 1; }
+.add-box h3 { color: var(--cor-verde-brilho); font-size: 18px; }
+
+.voltar {
+    background: var(--bg-painel);
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 90px;
+    left: 40px;
+    transition: all 0.3s ease;
+}
+
+.voltar:hover {
+    transform: translateY(-2px); /* Efeito de levantar levemente */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.voltar a {
+    color: var(--cor-verde-brilho);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+}
+
+/* =========================================
+   6. LAYOUT DO PDV (MESA DE TRABALHO)
+   ========================================= */
+/* Trava a tela para não rolar a página inteira, apenas as partes internas */
+.body-pdv {
+    overflow: hidden; 
+}
+
+.layout-pdv {
+    display: flex;
+    height: calc(100vh - 70px); /* Pega a altura total da tela e subtrai o tamanho da navbar */
+    width: 100%;
+}
+
+/* --- LADO ESQUERDO (Menu) --- */
+.area-menu {
+    flex: 1; /* Ocupa todo o espaço restante que o carrinho não estiver usando */
+    padding: 30px;
+    background-color: var(--bg-fundo);
+    overflow-y: auto; /* Permite rolar apenas esta parte da tela */
+}
+
+.header-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--bg-painel);
+}
+
+.btn-add-categoria {
+    background: transparent;
+    color: var(--cor-verde-brilho);
+    border: 2px dashed var(--cor-verde-brilho);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-categoria:hover {
+    background: rgba(75, 168, 66, 0.1);
+}
+
+/* --- LADO DIREITO (Carrinho) --- */
+.area-pedido {
+    background-color: var(--bg-painel);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3); /* Sombra para a esquerda */
+    transition: width 0.4s ease; /* Animação suave ao abrir/fechar */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estado Expandido (Padrão quando aberto) */
+.area-pedido {
+    width: 350px;
+}
+
+/* Estado Resumido (Fechado) */
+.area-pedido.resumido {
+    width: 90px;
+    cursor: pointer;
+}
+
+.area-pedido.resumido:hover {
+    background-color: #3f3f3f;
+}
+
+/* Esconde os detalhes quando estiver resumido */
+.area-pedido.resumido .pedido-detalhes { display: none; }
+
+/* Esconde o resumo pequeno quando estiver expandido */
+.area-pedido:not(.resumido) .pedido-resumo { display: none; }
+
+/* Visual do Resumo (Barra fina) */
+.pedido-resumo {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.resumo-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.qtd-itens {
+    background: var(--cor-verde);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.total-preco {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--cor-texto-sec);
+}
+
+.icone-expandir { font-size: 24px; }
+
+/* Visual da Barra Expandida */
+.pedido-detalhes {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.detalhes-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #4f4f4f;
+}
+
+.btn-fechar {
+    background: transparent;
+    color: var(--cor-texto-sec);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.lista-itens-pedido {
+    flex: 1; /* Preenche o meio do carrinho */
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.carrinho-vazio {
+    text-align: center;
+    color: var(--cor-texto-sec);
+    font-style: italic;
+    margin-top: 50px;
+}
+
+.detalhes-footer {
+    padding: 20px;
+    border-top: 2px solid #4f4f4f;
+}
+
+/* =========================================
+   7. MODAIS (Janelas Flutuantes)
+   ========================================= */
+/* O fundo escuro que cobre toda a tela */
+.modal-overlay {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000; /* Fica por cima de absolutamente tudo */
+    display: none; /* Escondido por padrão */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Quando o JS adiciona a classe 'ativo', ele aparece usando flexbox para centralizar */
+.modal-overlay.ativo {
+    display: flex; 
+}
+
+/* A caixa branca/escura do formulário */
+.modal-box {
+    background: var(--bg-painel);
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    animation: deslizarCima 0.3s ease; /* Animação suave */
+}
+
+@keyframes deslizarCima {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #4f4f4f;
+}
+
+.modal-header h3 {
+    color: var(--cor-texto);
+}
+
+.btn-fechar-modal {
+    background: transparent;
+    border: none;
+    color: var(--cor-texto-sec);
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.btn-fechar-modal:hover {
+    color: #ff6b6b;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+/* =========================================
+   8. CARDÁPIO (Categorias e Itens)
+   ========================================= */
+.bloco-categoria {
+    margin-bottom: 40px;
+}
+
+.categoria-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.categoria-header h3 {
+    color: var(--cor-texto);
+    font-size: 22px;
+}
+
+.btn-novo-item {
+    background: transparent;
+    border: 1px solid var(--cor-texto-sec);
+    color: var(--cor-texto-sec);
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.btn-novo-item:hover {
+    border-color: var(--cor-verde-brilho);
+    color: var(--cor-verde-brilho);
+}
+
+.grid-itens {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.item-card {
+    background: var(--bg-painel);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.item-card:hover {
+    border-color: var(--cor-verde);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.item-img {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+}
+
+.item-img.sem-foto {
+    background: #2a2a2a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #555;
+    font-size: 12px;
+}
+
+.item-info {
+    padding: 15px;
+}
+
+.item-info h4 { color: var(--cor-texto); margin-bottom: 5px; }
+.item-preco { color: var(--cor-verde-brilho); font-weight: bold; }
+
+/* =========================================
+   9. DETALHES E COMPLEMENTOS (Modal)
+   ========================================= */
+.modal-largo { max-width: 500px; } /* Modal maior para caber as opções */
+
+.destaque-preco {
+    color: var(--cor-verde-brilho);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.titulo-secao {
+    color: var(--cor-texto-sec);
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 20px 0 10px 0;
+    border-bottom: 1px solid #4f4f4f;
+    padding-bottom: 5px;
+}
+
+/* Checkboxes Customizados */
+.lista-complementos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.check-complemento {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-input);
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #4f4f4f;
+    transition: border-color 0.3s;
+}
+
+.check-complemento:hover { border-color: var(--cor-verde); }
+
+.check-complemento input { margin-right: 15px; transform: scale(1.2); accent-color: var(--cor-verde); }
+.nome-comp { flex: 1; color: var(--cor-texto); }
+.preco-comp { color: var(--cor-texto-sec); }
+
+/* Textarea de Observação */
+.caixa-obs {
+    width: 100%;
+    background: var(--bg-input);
+    border: 1px solid #4f4f4f;
+    color: var(--cor-texto);
+    padding: 12px;
+    border-radius: 6px;
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+}
+.caixa-obs:focus { border-color: var(--cor-verde); }
+
+/* Controles de Quantidade e Botão */
+.detalhes-acao {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.controle-qtd {
+    display: flex;
+    align-items: center;
+    background: var(--bg-input);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #4f4f4f;
+}
+
+.btn-qtd {
+    background: transparent;
+    color: var(--cor-texto);
+    border: none;
+    padding: 0 15px;
+    font-size: 18px;
+    cursor: pointer;
+    height: 100%;
+}
+.btn-qtd:hover { background: #4f4f4f; }
+
+.controle-qtd input {
+    width: 40px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: var(--cor-texto);
+    font-weight: bold;
+    outline: none;
+}
+
+.btn-add-carrinho { margin-top: 0; flex: 1; } /* Faz o botão verde esticar */

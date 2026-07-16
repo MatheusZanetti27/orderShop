@@ -1,0 +1,137 @@
+/* Resets e Fonte Padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+body {
+    background-color: #242424; /* Fundo um pouco mais escuro que o login para destacar os painéis */
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* ================= Navbar ================= */
+.navbar {
+    background-color: #363636;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-bottom: 3px solid #3b8536; /* Detalhe verde na base da navbar */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.logo-highlight {
+    color: #4ba842; /* Verde brilhante para destacar a marca */
+}
+
+.nav-user {
+    display: flex;
+    gap: 20px;
+    font-size: 15px;
+}
+
+.btn-sair {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-sair:hover {
+    color: #ff4c4c;
+}
+
+/* ================= Área Central (Setup) ================= */
+.container-central {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.setup-box {
+    background: #363636;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.setup-box h2 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.setup-box .subtitle {
+    color: #a0a0a0;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* ================= Formulário ================= */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: #2a2a2a;
+    border: 2px solid #4f4f4f;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #4ba842;
+    background: #333;
+}
+
+.input-group input::placeholder {
+    color: #666;
+}
+
+.btn-verde {
+    width: 100%;
+    background: #3b8536;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-verde:hover {
+    background: #489743;
+    box-shadow: 0 0 15px rgba(75, 168, 66, 0.4);
+}

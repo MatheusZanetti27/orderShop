@@ -1,0 +1,70 @@
+body{
+    font-family: 'Rubik';
+    background-color: #363636;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-box{
+    background: #4F4F4F;
+    width: 350px;
+    padding: 20px;
+    border-radius: 9px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+    display: grid;
+    gap: 18px;
+}
+
+.register-box form{
+    display: grid;
+    gap: 10px;
+}
+
+.register-box form input:not([type="radio"]){
+    padding: 10px;
+    border: 2px solid #3b8536;
+    border-radius: 3px;
+    outline: none;
+    background: #4F4F4F;
+}
+.register-box form input:not([type="radio"]):focus{
+    border-color: #489743;
+}
+.register-box form input[type="submit"]{
+    background: #367930;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+}
+
+.register-box form input[type="submit"]:hover{
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.register-box form .radio-group{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+input::placeholder{
+    color: #4ba842;
+}
+
+h2{
+    text-align: center;
+    color: #b3b3b3;
+}
+
+a{
+    font-size: 15px;
+    text-decoration: none;
+    color: #b3b3b3;
+    text-align: center;
+}

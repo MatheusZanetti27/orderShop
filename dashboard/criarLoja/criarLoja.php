@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'conexao.php';
+require_once '../../conexaoPhp/conexao.php';
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../../login/login.html");
     exit();

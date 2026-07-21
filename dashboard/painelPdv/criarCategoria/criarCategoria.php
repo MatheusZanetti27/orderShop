@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'conexao.php'; // Ajuste o caminho
+require_once '../../../conexaoPhp/conexao.php'; // Ajuste o caminho
 
 if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['restaurante_ativo'])) {
     die("Acesso negado.");

@@ -135,20 +135,20 @@ if (!isset($_SESSION['restaurante_ativo'])) {
                 <button class="btn-fechar-modal" onclick="fecharModalNovoItem()">X</button>
             </div>
             <div class="modal-body">
-                <form action="salvar_item.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" id="id_categoria_destino" name="id_categoria">
+                <form action="salvarItem/salvarItem.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" id="id_categoria_destino" name="idCategoria">
                     
                     <div class="input-group">
                         <label>Nome do Item</label>
-                        <input type="text" name="nome_item" placeholder="Ex: X-Tudo" required>
+                        <input type="text" name="nomeItem" placeholder="Ex: X-Tudo" required>
                     </div>
                     <div class="input-group">
                         <label>Preço (R$)</label>
-                        <input type="number" step="0.01" name="preco_item" placeholder="Ex: 25.50" required>
+                        <input type="number" step="0.01" name="precoItem" placeholder="Ex: 25.50" required>
                     </div>
                     <div class="input-group">
                         <label>Foto do Item (Opcional)</label>
-                        <input type="file" name="foto_item" accept="image/*">
+                        <input type="file" name="fotoItem" accept="image/*">
                     </div>
                     <button type="submit" class="btn-verde">Salvar Lanche</button>
                 </form>

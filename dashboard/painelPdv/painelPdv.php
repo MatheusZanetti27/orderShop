@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+require_once '../../conexaoPhp/conexao.php'; // Ajuste o caminho para o seu arquivo de conexão
+
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../../login/login.html");
     exit();

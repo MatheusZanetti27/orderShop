@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION["usuario_nome"] = $usuario["nome"];
     $_SESSION["nivelDeAcesso"] = $usuario["nivelDeAcesso"];
 
-    header("Location: ../dashboard/criarLoja/criarLoja.php");
+    header("Location: ../dashboard/meusRestaurantes/meusRestaurantes.php");
     exit();
     
     } else {

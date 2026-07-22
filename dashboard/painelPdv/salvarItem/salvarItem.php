@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $extensao = pathinfo($_FILES['fotoItem']['name'], PATHINFO_EXTENSION);
         // Cria um nome único para a imagem (ex: lanche_169999.jpg) para não sobrescrever
         $nome_arquivo = "lanche_" . time() . "." . $extensao; 
-        $pasta_destino = "uploads/" . $nome_arquivo;
+        $pasta_destino = "../uploads/" . $nome_arquivo;
 
         // Move a imagem temporária para a pasta definitiva
         if (move_uploaded_file($_FILES['fotoItem']['tmp_name'], $pasta_destino)) {

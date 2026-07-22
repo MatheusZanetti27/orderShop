@@ -47,33 +47,89 @@ if (!isset($_SESSION['restaurante_ativo'])) {
                 </button>
             </div>
 
+            <!-- Área Dinâmica das Categorias -->
             <div class="lista-categorias">
                 
-                <div class="bloco-categoria">
-                    <div class="categoria-header">
-                        <h3>🍔 Hambúrgueres</h3>
-                        <button class="btn-novo-item" onclick="abrirModalNovoItem(1)">+ Novo Item</button>
-                    </div>
-                    
-                    <div class="grid-itens">
-                        <div class="item-card" onclick="abrirModalDetalhes('X-Bacon', 'R$ 25,00')">
-                            <div class="item-img" style="background-image: url('https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=400&auto=format&fit=crop');"></div>
-                            <div class="item-info">
-                                <h4>X-Bacon</h4>
-                                <span class="item-preco">R$ 25,00</span>
+                <?php
+                // 1. Busca todas as categorias do restaurante atual
+                // Ajuste o nome da variável de sessão se estiver usando restauranteAtivo
+                $idRestaurante = $_SESSION['restaurante_ativo']; 
+                
+                $sqlCategorias = "SELECT * FROM categorias WHERE idRestaurante = ?";
+                $stmtCat = $conn->prepare($sqlCategorias);
+                $stmtCat->bind_param("i", $idRestaurante);
+                $stmtCat->execute();
+                $resultCat = $stmtCat->get_result();
+
+                if ($resultCat->num_rows > 0) {
+                    // Loop das Categorias
+                    while ($categoria = $resultCat->fetch_assoc()) {
+                        $idCategoria = $categoria['idCategoria'];
+                        $nomeCategoria = htmlspecialchars($categoria['nomeCategoria']); // Proteção contra XSS
+                        ?>
+                        
+                        <div class="bloco-categoria">
+                            <div class="categoria-header">
+                                <h3>🍽️ <?= $nomeCategoria ?></h3>
+                                <!-- Passa o ID da categoria dinamicamente para o JS -->
+                                <button class="btn-novo-item" onclick="abrirModalNovoItem(<?= $idCategoria ?>)">+ Novo Item</button>
+                            </div>
+                            
+                            <div class="grid-itens">
+                                <?php
+                                // 2. Busca os itens (lanches) que pertencem a ESTA categoria
+                                $sqlItens = "SELECT * FROM lanches WHERE idCategoria = ?";
+                                $stmtItens = $conn->prepare($sqlItens);
+                                $stmtItens->bind_param("i", $idCategoria);
+                                $stmtItens->execute();
+                                $resultItens = $stmtItens->get_result();
+
+                                if ($resultItens->num_rows > 0) {
+                                    // Loop dos Itens
+                                    while ($item = $resultItens->fetch_assoc()) {
+                                        $nomeLanche = htmlspecialchars($item['nomeLanche']);
+                                        $foto = $item['fotoCaminho'];
+                                        // Formata o preço para o padrão brasileiro (Ex: 25.50 vira 25,50)
+                                        $precoFormatado = number_format($item['preco'], 2, ',', '.');
+                                        ?>
+                                        
+                                        <!-- Card do Item: ao clicar, abre o modal de detalhes -->
+                                        <div class="item-card" onclick="abrirModalDetalhes('<?= $nomeLanche ?>', 'R$ <?= $precoFormatado ?>')">
+                                            
+                                            <?php if (!empty($foto)): ?>
+                                                <!-- Se tem foto, mostra a foto -->
+                                                <div class="item-img" style="background-image: url('<?= htmlspecialchars($foto) ?>');"></div>
+                                            <?php else: ?>
+                                                <!-- Se não tem foto, mostra o placeholder -->
+                                                <div class="item-img sem-foto"><span>Sem Foto</span></div>
+                                            <?php endif; ?>
+                                            
+                                            <div class="item-info">
+                                                <h4><?= $nomeLanche ?></h4>
+                                                <span class="item-preco">R$ <?= $precoFormatado ?></span>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                    }
+                                } else {
+                                    // Caso a categoria não tenha nenhum lanche cadastrado ainda
+                                    echo "<p style='color: var(--cor-texto-sec); font-size: 14px; padding: 10px;'>Nenhum item nesta categoria.</p>";
+                                }
+                                $stmtItens->close();
+                                ?>
                             </div>
                         </div>
 
-                        <div class="item-card" onclick="abrirModalDetalhes('X-Salada', 'R$ 20,00')">
-                            <div class="item-img sem-foto"><span>Sem Foto</span></div>
-                            <div class="item-info">
-                                <h4>X-Salada</h4>
-                                <span class="item-preco">R$ 20,00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                        <?php
+                    }
+                } else {
+                    // Caso o restaurante não tenha nenhuma categoria criada
+                    echo '<p style="color: var(--cor-texto-sec); font-style: italic;">Nenhuma categoria criada ainda. Clique em "+ Nova Categoria" para começar o seu cardápio.</p>';
+                }
+                $stmtCat->close();
+                ?>
+                
             </div>
         </section>
 

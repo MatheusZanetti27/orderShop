@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Inserindo no banco de dados
-    $stmt = $conn->prepare("INSERT INTO restaurantes (id_usuario, nomeLoja, telefone, cep) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isss", $id_usuario, $nomeLoja, $telefone, $cep);
+    $stmt = $conn->prepare("INSERT INTO restaurantes (idUsuario, nomeLoja, telefone, cep) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isss", $idUsuario, $nomeLoja, $telefone, $cep);
 
     if ($stmt->execute()) {
         // Sucesso! Manda de volta para a tela de seleção com as caixas
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Crie seu Estabelecimento</h2>
             <p class="subtitle">Para começar a gerenciar pedidos, precisamos dos dados do seu restaurante.</p>
             
-            <form action="criar_loja.php" method="POST">
+            <form action="criarLoja.php" method="POST">
                 <div class="input-group">
                     <label for="nomeLoja">Nome do Restaurante</label>
                     <input type="text" id="nomeLoja" name="nomeLoja" placeholder="Ex: Burger King" required>

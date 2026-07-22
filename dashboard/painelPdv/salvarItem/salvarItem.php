@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         // Volta para o painel com sucesso
-        header("Location: ../painelPdv.php?id=" . $id_restaurante);
+        header("Location: ../painelPdv.php?id=" . $idRestaurante);
         exit();
     } else {
         echo "Erro ao salvar lanche: " . $stmt->error;

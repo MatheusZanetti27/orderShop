@@ -176,7 +176,7 @@ if (!isset($_SESSION['restaurante_ativo'])) {
             </div>
             
             <div class="modal-body">
-                <form action="../criarCategoria/criarCategoria.php" method="POST">
+                <form action="criarCategoria/criarCategoria.php" method="POST">
                     <div class="input-group">
                         <label for="nomeCategoria">Nome da Categoria</label>
                         <input type="text" id="nomeCategoria" name="nomeCategoria" placeholder="Ex: Hambúrgueres, Bebidas..." required>

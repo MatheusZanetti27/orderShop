@@ -76,6 +76,8 @@ if (!isset($_SESSION['restaurante_ativo'])) {
                                 <h3>🍽️ <?= $nomeCategoria ?></h3>
                                 <div style="display: flex; gap: 10px;">
                                     <button class="btn-novo-item" onclick="abrirModalNovoItem(<?= $idCategoria ?>)">+ Novo Item</button>
+                                    <!-- NOVO: Botão de Editar Categoria -->
+                                    <a href="#" onclick="abrirModalEditarCategoria(<?= $idCategoria ?>, '<?= $nomeCategoria ?>')" style="color: #4CAF50; text-decoration: none; font-size: 13px; align-self: center; margin-right: 10px;">✏️ Editar</a>
                                     <!-- Botão de excluir categoria -->
                                     <a href="criarCategoria/excluirCategoria.php?idCategoria=<?= $idCategoria ?>" onclick="return confirm('ATENÇÃO: Isso apagará esta categoria e TODOS os lanches dentro dela. Tem certeza?')" style="color: #ff4c4c; text-decoration: none; font-size: 13px; align-self: center;">🗑️ Excluir</a>
                                 </div>
@@ -100,7 +102,7 @@ if (!isset($_SESSION['restaurante_ativo'])) {
                                         ?>
                                         
                                         <!-- Card do Item: ao clicar, abre o modal de detalhes -->
-                                        <div class="item-card" onclick="abrirModalDetalhes('<?= $nomeLanche ?>', 'R$ <?= $precoFormatado ?>')">
+                                        <div class="item-card" onclick="abrirModalDetalhes(<?= $item['idLanche'] ?>, '<?= $nomeLanche ?>', 'R$ <?= $precoFormatado ?>')">
                                             
                                             <?php if (!empty($foto)): ?>
                                                 <!-- Se tem foto, mostra a foto -->
@@ -270,6 +272,25 @@ if (!isset($_SESSION['restaurante_ativo'])) {
                     </div>
                     <button class="btn-verde btn-add-carrinho">Adicionar ao Pedido</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal: Editar Categoria -->
+    <div class="modal-overlay" id="modal-editar-categoria">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Editar Categoria</h3>
+                <button class="btn-fechar-modal" onclick="fecharModalEditarCategoria()">X</button>
+            </div>
+            <div class="modal-body">
+                <form action="criarCategoria/editarCategoria.php" method="POST">
+                    <input type="hidden" id="idCategoriaEdit" name="idCategoria">
+                    <div class="input-group">
+                        <label for="nomeCategoriaEdit">Novo Nome da Categoria</label>
+                        <input type="text" id="nomeCategoriaEdit" name="nomeCategoria" required>
+                    </div>
+                    <button type="submit" class="btn-verde">Salvar Alterações</button>
+                </form>
             </div>
         </div>
     </div>

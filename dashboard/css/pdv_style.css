@@ -670,3 +670,52 @@ body {
 }
 
 .btn-add-complemento:hover { background: rgba(75, 168, 66, 0.1); }
+
+/* =========================================
+   11. CONTROLE DE QUANTIDADE - COMPLEMENTOS
+   ========================================= */
+.item-complemento-qtd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.info-comp {
+    display: flex;
+    flex-direction: column;
+}
+
+.controle-qtd-comp {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-qtd-comp {
+    background: var(--bg-input, #333);
+    color: var(--cor-texto, #fff);
+    border: 1px solid #4f4f4f;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-qtd-comp:hover { background: #4f4f4f; }
+
+.qtd-comp-input {
+    width: 30px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: var(--cor-texto, #fff);
+    font-weight: bold;
+    outline: none;
+}
+/* Esconder as setinhas padrão do input number */
+.qtd-comp-input::-webkit-outer-spin-button, 
+.qtd-comp-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }

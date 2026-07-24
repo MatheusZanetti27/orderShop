@@ -35,6 +35,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // ----------------------------------
 
+    // --- VERIFICAÇÃO DE DUPLICIDADE ---
+    $sqlCheck = "SELECT idLanche FROM lanches WHERE idCategoria = ? AND nomeLanche = ?";
+    $stmtCheck = $conn->prepare($sqlCheck);
+    $stmtCheck->bind_param("is", $idCategoria, $nomeItem);
+    $stmtCheck->execute();
+    
+    if ($stmtCheck->get_result()->num_rows > 0) {
+        echo "<script>alert('Este item já existe nesta categoria!'); window.location.href='../painelPdv.php?id=$idRestaurante';</script>";
+        exit();
+    }
+    $stmtCheck->close();
+    // ----------------------------------
+
     // Insere no banco de dados
     $stmt = $conn->prepare("INSERT INTO lanches (idCategoria, nomeLanche, preco, fotoCaminho) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("isds", $idCategoria, $nomeItem, $precoItem, $caminho_foto);

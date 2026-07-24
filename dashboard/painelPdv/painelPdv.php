@@ -74,8 +74,11 @@ if (!isset($_SESSION['restaurante_ativo'])) {
                         <div class="bloco-categoria">
                             <div class="categoria-header">
                                 <h3>🍽️ <?= $nomeCategoria ?></h3>
-                                <!-- Passa o ID da categoria dinamicamente para o JS -->
-                                <button class="btn-novo-item" onclick="abrirModalNovoItem(<?= $idCategoria ?>)">+ Novo Item</button>
+                                <div style="display: flex; gap: 10px;">
+                                    <button class="btn-novo-item" onclick="abrirModalNovoItem(<?= $idCategoria ?>)">+ Novo Item</button>
+                                    <!-- Botão de excluir categoria -->
+                                    <a href="criarCategoria/excluirCategoria.php?idCategoria=<?= $idCategoria ?>" onclick="return confirm('ATENÇÃO: Isso apagará esta categoria e TODOS os lanches dentro dela. Tem certeza?')" style="color: #ff4c4c; text-decoration: none; font-size: 13px; align-self: center;">🗑️ Excluir</a>
+                                </div>
                             </div>
                             
                             <div class="grid-itens">

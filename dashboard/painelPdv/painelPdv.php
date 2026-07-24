@@ -112,7 +112,17 @@ if (!isset($_SESSION['restaurante_ativo'])) {
                                             
                                             <div class="item-info">
                                                 <h4><?= $nomeLanche ?></h4>
-                                                <span class="item-preco">R$ <?= $precoFormatado ?></span>
+                                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <span class="item-preco">R$ <?= $precoFormatado ?></span>
+        
+                                                    <!-- Botão de Apagar com stopPropagation para não abrir o modal de detalhes -->
+                                                    <a href="salvarItem/excluirItem.php?idLanche=<?= $item['idLanche'] ?>" 
+                                                        onclick="event.stopPropagation(); return confirm('Deseja realmente excluir este lanche?');" 
+                                                        style="color: #ff4c4c; text-decoration: none; font-size: 16px; padding: 5px;" 
+                                                        title="Excluir Lanche">
+                                                        🗑️
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -169,7 +179,6 @@ if (!isset($_SESSION['restaurante_ativo'])) {
         </aside>
 
     </main>
-    <script src="../js/pdv_js.js"></script>
     <div class="modal-overlay" id="modal-categoria">
         <div class="modal-box">
             
@@ -211,6 +220,16 @@ if (!isset($_SESSION['restaurante_ativo'])) {
                     <div class="input-group">
                         <label>Foto do Item (Opcional)</label>
                         <input type="file" name="fotoItem" accept="image/*">
+                    </div>
+
+                    <!-- NOVA SEÇÃO: Complementos -->
+                    <div class="secao-complementos">
+                        <h4>Complementos (Opcional)</h4>
+                        
+                        <!-- Aqui dentro o JavaScript vai injetar os novos campos -->
+                        <div id="lista-complementos-form"></div>
+                        
+                        <button type="button" class="btn-add-complemento" onclick="adicionarCampoComplemento()">+ Adicionar Complemento</button>
                     </div>
                     <button type="submit" class="btn-verde">Salvar Lanche</button>
                 </form>
@@ -255,5 +274,6 @@ if (!isset($_SESSION['restaurante_ativo'])) {
         </div>
     </div>
     
+    <script src="../js/pdv_js.js"></script>
 </body>
 </html>

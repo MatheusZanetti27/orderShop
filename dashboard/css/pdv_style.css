@@ -601,3 +601,72 @@ body {
 }
 
 .btn-add-carrinho { margin-top: 0; flex: 1; } /* Faz o botão verde esticar */
+
+/* =========================================
+   10. FORMULÁRIO DE COMPLEMENTOS
+   ========================================= */
+.secao-complementos {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #4f4f4f;
+}
+
+.secao-complementos h4 {
+    font-size: 14px;
+    color: var(--cor-texto-sec);
+    margin-bottom: 10px;
+}
+
+.linha-complemento {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.linha-complemento input {
+    flex: 1;
+    padding: 10px;
+    background: var(--bg-input);
+    border: 1px solid #4f4f4f;
+    color: var(--cor-texto);
+    border-radius: 6px;
+    outline: none;
+}
+
+.linha-complemento input:focus { border-color: var(--cor-verde); }
+
+.linha-complemento .input-preco {
+    width: 100px;
+    flex: none;
+}
+
+.btn-remover-comp {
+    background: #ff4c4c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.btn-remover-comp:hover { background: #ff2a2a; }
+
+.btn-add-complemento {
+    background: transparent;
+    color: var(--cor-verde-brilho);
+    border: 1px dashed var(--cor-verde-brilho);
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.btn-add-complemento:hover { background: rgba(75, 168, 66, 0.1); }
